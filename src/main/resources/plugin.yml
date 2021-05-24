@@ -1,0 +1,11 @@
+name: ${project.name}
+main: ${spigot.main}
+authors: [mfnalex, JEFF Media GbR]
+version: ${project.version}
+website: ${spigot.website}
+prefix: ${spigot.prefix}
+api-version: "1.13"
+commands:
+  replant:
+    description: Manages your RePlant settings
+    usage: /<command>

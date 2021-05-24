@@ -1,0 +1,7 @@
+prefix: "&6[&aRe&2Plant&6] &r"
+command-players-only: "&cThis command can only be run by players."
+config-reloaded: "&aConfiguration has been reloaded."
+replant-crops-enabled: "&6Replanting crops is now &aenabled&6."
+replant-crops-disabled: "&6Replanting crops is now &cdisabled&6."
+replant-trees-enabled: "&6Replanting trees is now &aenabled&6."
+replant-trees-disabled: "&6Replanting trees is now &cdisabled&6."

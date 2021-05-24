@@ -1,0 +1,95 @@
+#####################
+#      Replant      #
+#####################
+
+# Author:
+#   mfnalex (JEFF Media GbR)
+#
+# Discord:
+#   https://discord.jeff-media.de
+
+# When set to true, players need the "replant.use" permission to use Replant
+# When set to false, all players can use Replant
+use-permissions: false
+
+# See the lang/ folder for available translations. You can also create your own.
+language: en
+
+#####################
+#   Replant Crops   #
+#####################
+
+# RePlant can automatically replant harvested crops. Every player can individually
+# enable or disable this feature using "/replant crops".
+
+# Delay in seconds before replanting crops. Set to 0 to instantly replant crops.
+crop-replant-delay: 1.0
+
+# When set to true, RePlant reduces the dropped seeds by one so you don't get more
+# seeds than in vanilla.
+# When set to false, RePlant does not alter the drops, which means that every replanted
+# crop basically results in one free seed.
+crop-replant-costs: true
+
+#########################
+# Plant fallen saplings #
+#########################
+
+# Fallen down saplings can be automatically planted when they are on the correct ground type for this tree type.
+plant-fallen-saplings: true
+
+# The sapling will be automatically planted after this amount of seconds.
+# Default is 120 seconds (2 minutes) so you still have time to pick it up if you like.
+# Maximum is 300 seconds (5 minutes) because items despawn after 5 minutes.
+# Set to 0 to instantly plant all saplings.
+plant-fallen-saplings-delay: 120.0
+
+# When set to false, saplings thrown on the ground by a player will not be planted
+plant-fallen-saplings-thrown-by-player: true
+
+# When the current block is already blocked by another sapling, we can search for a nearby spot in a 3x3 area
+# You should leave this enabled in case saplings are being stacked
+search-nearby-when-block-is-occupied: true
+
+#################
+#   Particles   #
+#################
+
+crop-particles-enabled: true
+crop-particles-type: villager_happy
+crop-particles-count: 10
+
+sapling-particles-enabled: true
+sapling-particles-type: villager_happy
+sapling-particles-count: 10
+
+#################
+# Other plugins #
+#################
+
+# When planting saplings, RePlant can call a fake BlockPlaceEvent in the name of the throwing player so other plugins
+# can cancel this. You probably want to leave this enabled when you are using protection plugins like WorldGuard, ...
+# WARNING: Some anti cheat plugins might cancel this event. Disable this if you have problems with your anti cheat plugin!
+call-block-place-event: true
+
+##################
+# Update Checker #
+##################
+
+# Should we check for updates?
+# When enabled, a message is printed in the console if a new version has
+# been found, and OPs will be notified when they join the server.
+# When set to true, we will check for updates on startup and every X hours
+# When set to on-startup, we will only check on startup
+# When set to false, don't check for updates
+check-for-updates: true
+
+# When check-for-updates is true, AngelChest will check every X hours
+check-interval: 4
+
+# Debug mode - you probably don't want this
+debug: false
+
+# Do not change the values below!
+config-version: ${config.version}
+plugin-version: ${project.version}
