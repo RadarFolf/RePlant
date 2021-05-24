@@ -27,7 +27,6 @@ public class ParticleManager {
     }
 
     public int getParticleCount() {
-        System.out.println(main.getConfig().getInt(node + "-particles-count"));
         return main.getConfig().getInt(node + "-particles-count");
     }
 

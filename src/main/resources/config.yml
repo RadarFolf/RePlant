@@ -15,6 +15,9 @@ use-permissions: false
 # See the lang/ folder for available translations. You can also create your own.
 language: en
 
+# Prefix to use for all messages. Set to "" to disable
+prefix: "&6[&aRe&2Plant&6] &r"
+
 #####################
 #   Replant Crops   #
 #####################
@@ -67,6 +70,10 @@ sapling-particles-count: 10
 # Other plugins #
 #################
 
+# When planting saplings and WorldGuard is installed, RePlant can check if the player who threw a sapling is allowed to
+# build at the place where the sapling would be planted. If not, the sapling will not be planted.
+use-worldguard: true
+
 # When planting saplings, RePlant can call a fake BlockPlaceEvent in the name of the throwing player so other plugins
 # can cancel this. You probably want to leave this enabled when you are using protection plugins like WorldGuard, ...
 # WARNING: Some anti cheat plugins might cancel this event. Disable this if you have problems with your anti cheat plugin!
@@ -86,6 +93,10 @@ check-for-updates: true
 
 # When check-for-updates is true, AngelChest will check every X hours
 check-interval: 4
+
+#########
+# Done! #
+#########
 
 # Debug mode - you probably don't want this
 debug: false

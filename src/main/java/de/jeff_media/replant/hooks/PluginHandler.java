@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class PluginHandler {
 
-    public static boolean canBuild(Player player, Block block) {
+    public boolean canBuild(Player player, Block block) {
         return true;
     }
 

@@ -5,7 +5,22 @@ version: ${project.version}
 website: ${spigot.website}
 prefix: ${spigot.prefix}
 api-version: "1.13"
+softdepend:
+  - WorldGuard
 commands:
   replant:
     description: Manages your RePlant settings
     usage: /<command>
+    permission: replant.use
+permissions:
+  replant.use:
+    description: Allows to enable automatic crop replanting using /replant crops
+    default: op
+  replant.reload:
+    description: Allows to reload the config using /replant reload
+    default: op
+  replant.*:
+    description: Gives access to all RePlant features
+    children:
+      - replant.use
+      - replant.reload

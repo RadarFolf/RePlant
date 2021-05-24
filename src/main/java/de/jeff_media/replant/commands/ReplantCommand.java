@@ -2,6 +2,7 @@ package de.jeff_media.replant.commands;
 
 import de.jeff_media.replant.Main;
 import de.jeff_media.replant.config.Messages;
+import de.jeff_media.replant.config.Permissions;
 import de.jeff_media.replant.utils.CommandUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,7 +29,10 @@ public class ReplantCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 
-
+        if(!Permissions.isAllowed(sender, Permissions.PERMISSION_USE)) {
+            sender.sendMessage(command.getPermissionMessage());
+            return true;
+        }
 
         if(args.length==0) {
             usage(sender, null);
@@ -41,11 +45,12 @@ public class ReplantCommand implements CommandExecutor, TabCompleter {
         if(args.length==1) {
             switch(args[0].toLowerCase(Locale.ROOT)) {
                 case "reload":
+                    if(!Permissions.isAllowed(sender, Permissions.PERMISSION_RELOAD)) {
+                        sender.sendMessage(command.getPermissionMessage());
+                        return true;
+                    }
                     main.reload();
                     sendMessage(sender, CONFIG_RELOADED);
-                    return true;
-                default:
-                    usage(sender, null);
                     return true;
             }
         }

@@ -32,7 +32,7 @@ public class Messages {
             yaml = YamlConfiguration.loadConfiguration(file);
         }
 
-        PREFIX = yaml.getString("prefix","");
+        PREFIX = main.getConfig().getString("prefix","");
 
         COMMAND_PLAYERS_ONLY = yaml.getString("command-players-only");
         CONFIG_RELOADED = yaml.getString("config-reloaded");
@@ -45,8 +45,6 @@ public class Messages {
         langDir.mkdirs();
         return new File(langDir,lang + ".yml");
     }
-
-
 
     public static void sendMessage(CommandSender receiver, String message) {
         if(message == null || message.length()==0) return;

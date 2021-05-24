@@ -15,7 +15,7 @@ public class FileUtils {
         Main main = Main.getInstance();
         File langDir = new File(main.getDataFolder(),"lang");
         langDir.mkdirs();
-        for (String lang : new String[] { "en"}) {
+        for (String lang : new String[] { "en", "de"}) {
             InputStream is = getFileFromResourceAsStream("lang/" + lang + ".yml");
             File file = new File(new File(main.getDataFolder(),"lang"),lang + ".yml");
             try (FileOutputStream os = new FileOutputStream(file, false)) {

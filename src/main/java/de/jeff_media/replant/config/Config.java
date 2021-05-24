@@ -18,6 +18,7 @@ public class Config {
     public static final String CHECK_FOR_UPDATES = "check-for-updates";
     public static final String CHECK_FOR_UPDATES_INTERVAL = "check-for-updates-interval";
     public static final String CALL_BLOCK_PLACE_EVENT = "call-block-place-event";
+    public static final String USE_WORLDGUARD = "use-worldguard";
     public static final String DEBUG = "debug";
 
     public static void init() {
@@ -32,6 +33,7 @@ public class Config {
         addDefault(CHECK_FOR_UPDATES, true);
         addDefault(CHECK_FOR_UPDATES_INTERVAL, 4);
         addDefault(CALL_BLOCK_PLACE_EVENT, true);
+        addDefault(USE_WORLDGUARD, true);
         addDefault(DEBUG, false);
     }
 

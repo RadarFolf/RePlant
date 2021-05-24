@@ -6,12 +6,16 @@ import de.jeff_media.replant.config.ConfigUpdater;
 import de.jeff_media.replant.config.Messages;
 import de.jeff_media.replant.handlers.ParticleManager;
 import de.jeff_media.replant.handlers.SaplingManager;
+import de.jeff_media.replant.hooks.PluginHandler;
+import de.jeff_media.replant.hooks.WorldGuardHandler;
 import de.jeff_media.replant.listeners.CropListener;
 import de.jeff_media.replant.listeners.SaplingListener;
 import de.jeff_media.replant.nbt.PlayerManager;
 import de.jeff_media.replant.utils.FileUtils;
 import de.jeff_media.updatechecker.UpdateChecker;
 import de.jeff_media.updatechecker.UserAgentBuilder;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -21,6 +25,7 @@ public class Main extends JavaPlugin {
     public static Main getInstance() {
         return instance;
     }
+    private PluginHandler worldGuardHandler = new PluginHandler();
 
     private PlayerManager playerManager;
     private SaplingManager saplingManager;
@@ -37,6 +42,10 @@ public class Main extends JavaPlugin {
 
     public static void debug(String text) {
         if(debug) Main.getInstance().getLogger().warning("[DEBUG] " + text);
+    }
+
+    public PluginHandler getWorldGuardHandler() {
+        return worldGuardHandler;
     }
 
     @Override
@@ -58,7 +67,6 @@ public class Main extends JavaPlugin {
         cropParticleManager = new ParticleManager("crop");
 
         initUpdateChecker();
-
 
         //playerManager = new PlayerManager();
     }
@@ -88,5 +96,18 @@ public class Main extends JavaPlugin {
         reloadConfig();
         ConfigUpdater.updateConfig();
         debug = getConfig().getBoolean(Config.DEBUG);
+
+        if(getConfig().getBoolean(Config.USE_WORLDGUARD)) {
+            if(Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+                try {
+                    worldGuardHandler = new WorldGuardHandler();
+                } catch(Exception e) {
+                    getLogger().warning("Could not hook into WorldGuard although it seems to be installed.");
+                    getLogger().warning("Detected WorldGuard version: " + Bukkit.getPluginManager().getPlugin("WorldGuard").getDescription().getVersion());
+                    worldGuardHandler = new PluginHandler();
+                }
+            }
+        }
+
     }
 }

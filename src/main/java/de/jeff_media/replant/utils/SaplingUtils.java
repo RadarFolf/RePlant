@@ -44,10 +44,8 @@ public class SaplingUtils {
 
     public static boolean isSapling(Material material) {
         if(saplings.contains(material)) {
-            Main.debug(material + " is a sapling!");
             return true;
         } else {
-            Main.debug(material + " is NOT a sapling!");
             return false;
         }
     }

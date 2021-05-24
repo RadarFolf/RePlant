@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.jeff_media</groupId>
-    <name>Replant</name>
-    <artifactId>Replant</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <name>RePlant</name>
+    <artifactId>RePlant</artifactId>
+    <version>1.0.0</version>
 
     <properties>
         <spigot.website>https://www.spigotmc.org/resources/authors/mfnalex.175238/</spigot.website>
@@ -39,7 +39,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.1</version>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>de.jeff_media.updatechecker</pattern>
+                            <shadedPattern>de.jeff_media.replant.updatechecker</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -95,6 +103,10 @@
             <id>jeff-media-gbr</id>
             <url>https://repo.jeff-media.de/maven2</url>
         </repository>
+        <repository>
+            <id>sk89q-repo</id>
+            <url>https://maven.enginehub.org/repo/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -115,6 +127,12 @@
             <artifactId>SpigotUpdateChecker</artifactId>
             <version>1.2.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-bukkit</artifactId>
+            <version>7.0.4</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
