@@ -112,12 +112,13 @@ public class SaplingManager {
                 }
             }
             if (occupiedBlock == block) {
-                //Main.debug("Could not find a free spot ");
+                main.debug("Could not find a free spot ");
                 unregister(item);
                 return;
             }
         }
         if (!SaplingUtils.getValidGroundTypes(item.getItemStack().getType()).contains(block.getRelative(BlockFace.DOWN).getType())) {
+            main.debug("Invalid ground type");
             unregister(item);
             return;
         }
@@ -132,7 +133,7 @@ public class SaplingManager {
 
         if (main.getConfig().getBoolean(Config.USE_WORLDGUARD) && throwingPlayer != null) {
             if (!main.getWorldGuardHandler().canBuild(throwingPlayer, block)) {
-                //main.debug("Sapling inside protected WorldGuard region.");
+                main.debug("Sapling inside protected WorldGuard region.");
                 unregister(item);
                 return;
             }
@@ -142,7 +143,7 @@ public class SaplingManager {
             BlockPlaceEvent blockPlaceEvent = new BlockPlaceEvent(block, block.getState(), block.getRelative(BlockFace.DOWN), item.getItemStack(), throwingPlayer, true, EquipmentSlot.HAND);
             Bukkit.getPluginManager().callEvent(blockPlaceEvent);
             if (blockPlaceEvent.isCancelled()) {
-                //main.debug("BlockPlaceEvent cancelled.");
+                main.debug("BlockPlaceEvent cancelled.");
                 unregister(item);
                 return;
             }

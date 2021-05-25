@@ -59,7 +59,6 @@ public class Main extends JavaPlugin {
         new CropListener();
         new SaplingListener();
         new ReplantCommand();
-        new Messages(getConfig().getString(Config.LANGUAGE));
 
         playerManager = new PlayerManager();
         saplingManager = new SaplingManager();
@@ -96,6 +95,7 @@ public class Main extends JavaPlugin {
         reloadConfig();
         ConfigUpdater.updateConfig();
         debug = getConfig().getBoolean(Config.DEBUG);
+        new Messages(getConfig().getString(Config.LANGUAGE));
 
         if(getConfig().getBoolean(Config.USE_WORLDGUARD)) {
             if(Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {

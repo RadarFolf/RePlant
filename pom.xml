@@ -6,7 +6,7 @@
     <groupId>de.jeff_media</groupId>
     <name>RePlant</name>
     <artifactId>RePlant</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <spigot.website>https://www.spigotmc.org/resources/authors/mfnalex.175238/</spigot.website>

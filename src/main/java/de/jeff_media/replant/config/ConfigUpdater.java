@@ -27,7 +27,7 @@ public final class ConfigUpdater {
     // Lines STARTING WITH these names will get no quotes although they would match one of the lists below
     private static final String[] CONFLICTING_NODES_NEEDING_NO_QUOTES = {};
     // Lines STARTING WITH these names will get their values wrapped in double quotes
-    private static final String[] NODES_NEEDING_DOUBLE_QUOTES = {};
+    private static final String[] NODES_NEEDING_DOUBLE_QUOTES = {"prefix"};
     // Lines STARTING WITH these names will get their values wrapped in single quotes
     private static final String[] NODES_NEEDING_SINGLE_QUOTES = {};
 
