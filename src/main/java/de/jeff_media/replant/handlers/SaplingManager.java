@@ -87,38 +87,17 @@ public class SaplingManager {
             return;
         }
 
-        Block block = item.getLocation().getBlock();
+        Block saplingBlock = item.getLocation().getBlock();
 
         // Soulsand is too small, fckn son of a bitch
-        if (block.getType() == Material.SOUL_SAND) {
-            block = block.getRelative(BlockFace.UP);
+        if (saplingBlock.getType() == Material.SOUL_SAND) {
+            saplingBlock = saplingBlock.getRelative(BlockFace.UP);
         }
-        if (!block.getType().isAir()) {
-            Block occupiedBlock = block;
-            //System.out.println("\n\n\n\n\n\n\nOriginal Block: " + block);
-            if (main.getConfig().getBoolean(Config.SAPLING_REPLANT_SEARCH_NEARBY)) {
-                outerloop:
-                for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        for (int z = -1; z <= 1; z++) {
-                            //System.out.println("\nChecking " + block);
-                            if (block.getRelative(x, y, z).getType().isAir()) {
-                                // System.out.println("-> YES");
-                                block = block.getRelative(x, y, z);
-                                break outerloop;
-                            }
-                        }
-                    }
-                }
-            }
-            if (occupiedBlock == block) {
-                main.debug("Could not find a free spot ");
-                unregister(item);
-                return;
-            }
-        }
-        if (!SaplingUtils.getValidGroundTypes(item.getItemStack().getType()).contains(block.getRelative(BlockFace.DOWN).getType())) {
-            main.debug("Invalid ground type");
+
+        saplingBlock = SaplingUtils.findValidSpot(saplingBlock, item);
+
+        if(saplingBlock == null) {
+            Main.debug("Could not find valid spot");
             unregister(item);
             return;
         }
@@ -132,7 +111,7 @@ public class SaplingManager {
         }
 
         if (main.getConfig().getBoolean(Config.USE_WORLDGUARD) && throwingPlayer != null) {
-            if (!main.getWorldGuardHandler().canBuild(throwingPlayer, block)) {
+            if (!main.getWorldGuardHandler().canBuild(throwingPlayer, saplingBlock)) {
                 main.debug("Sapling inside protected WorldGuard region.");
                 unregister(item);
                 return;
@@ -140,7 +119,7 @@ public class SaplingManager {
         }
 
         if (main.getConfig().getBoolean(Config.CALL_BLOCK_PLACE_EVENT) && throwingPlayer != null) {
-            BlockPlaceEvent blockPlaceEvent = new BlockPlaceEvent(block, block.getState(), block.getRelative(BlockFace.DOWN), item.getItemStack(), throwingPlayer, true, EquipmentSlot.HAND);
+            BlockPlaceEvent blockPlaceEvent = new BlockPlaceEvent(saplingBlock, saplingBlock.getState(), saplingBlock.getRelative(BlockFace.DOWN), item.getItemStack(), throwingPlayer, true, EquipmentSlot.HAND);
             Bukkit.getPluginManager().callEvent(blockPlaceEvent);
             if (blockPlaceEvent.isCancelled()) {
                 main.debug("BlockPlaceEvent cancelled.");
@@ -150,8 +129,8 @@ public class SaplingManager {
         }
 
         remove(item);
-        main.getSaplingParticleManager().spawnParticles(block);
-        block.setType(item.getItemStack().getType());
+        main.getSaplingParticleManager().spawnParticles(saplingBlock);
+        saplingBlock.setType(item.getItemStack().getType());
     }
 
     public void unregister(Item item) {

@@ -1,11 +1,15 @@
 package de.jeff_media.replant.utils;
 
 import de.jeff_media.replant.Main;
+import de.jeff_media.replant.config.Config;
 import org.bukkit.Material;
 import org.bukkit.Tag;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,6 +42,29 @@ public class SaplingUtils {
 
     private static final HashSet<Material> netherwartGroundTypes = new HashSet<>(Collections.singleton(Material.SOUL_SAND));
 
+    public static @Nullable Block findValidSpot(Block saplingBlock, Item item) {
+        Block below = saplingBlock.getRelative(BlockFace.DOWN);
+        if(saplingBlock.getType().isAir() && isValidGround(below, item)) return saplingBlock;
+
+        if(!Main.getInstance().getConfig().getBoolean(Config.SAPLING_REPLANT_SEARCH_NEARBY)) return null;
+
+        //Main.debug("Block " + saplingBlock + " is not appropriate, looking nearby...");
+
+        for(int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                for(int z = -1; z <= 1; z++) {
+                    Block candidate = saplingBlock.getRelative(x,y,z);
+                    //Main.debug("Checking " + candidate);
+                    below = candidate.getRelative(BlockFace.DOWN);
+                    if(candidate.getType().isAir() && isValidGround(below, item)) {
+                        return candidate;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public static boolean isSapling(Item item) {
         return isSapling(item.getItemStack().getType());
     }
@@ -48,6 +75,11 @@ public class SaplingUtils {
         } else {
             return false;
         }
+    }
+
+    public static boolean isValidGround(Block block, Item sapling) {
+        Material type = sapling.getItemStack().getType();
+        return getValidGroundTypes(type).contains(block.getType());
     }
 
     public static Set<Material> getValidGroundTypes(Material sapling) {

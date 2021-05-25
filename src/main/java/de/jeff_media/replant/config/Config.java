@@ -14,7 +14,7 @@ public class Config {
     public static final String SAPLING_REPLANT = "plant-fallen-saplings";
     public static final String SAPLING_REPLANT_DELAY = "plant-fallen-saplings-delay";
     public static final String SAPLING_REPLANT_THROWN_BY_PLAYER = "plant-fallen-saplings-thrown-by-player";
-    public static final String SAPLING_REPLANT_SEARCH_NEARBY = "plant-fallen-saplings-search-nearby";
+    public static final String SAPLING_REPLANT_SEARCH_NEARBY = "search-nearby-when-block-is-occupied";
     public static final String CHECK_FOR_UPDATES = "check-for-updates";
     public static final String CHECK_FOR_UPDATES_INTERVAL = "check-for-updates-interval";
     public static final String CALL_BLOCK_PLACE_EVENT = "call-block-place-event";
