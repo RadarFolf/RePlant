@@ -35,8 +35,12 @@ public class ReplantCommand implements CommandExecutor, TabCompleter {
         }
 
         if(args.length==0) {
-            usage(sender, null);
-            return true;
+            if(sender instanceof Player) {
+                args = new String[] {"crops"};
+            } else {
+                usage(sender, null);
+                return true;
+            }
         }
 
         /*
@@ -51,6 +55,9 @@ public class ReplantCommand implements CommandExecutor, TabCompleter {
                     }
                     main.reload();
                     sendMessage(sender, CONFIG_RELOADED);
+                    return true;
+                case "help":
+                    usage(sender,null);
                     return true;
             }
         }
@@ -82,6 +89,7 @@ public class ReplantCommand implements CommandExecutor, TabCompleter {
         if(arg==null) {
             commands.put("crops","Toggles auto-replanting crops");
             commands.put("reload","Reloads config file");
+            commands.put("help","Shows this help message");
             //commands.put("trees","Toggle auto-replanting trees");
             CommandUtils.printUsage(sender,"/replant",commands);
         }
@@ -89,7 +97,7 @@ public class ReplantCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if(args.length<2) return Arrays.asList(new String[] {"crops","reload"});
+        if(args.length<2) return Arrays.asList(new String[] {"crops","reload","help"});
         return null;
     }
 }

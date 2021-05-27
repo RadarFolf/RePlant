@@ -1,6 +1,7 @@
 package de.jeff_media.replant.nbt;
 
 import de.jeff_media.replant.Main;
+import de.jeff_media.replant.config.Config;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -15,7 +16,8 @@ public class PlayerSettings {
 
     public static boolean hasEnabled(Player player, NamespacedKey setting) {
         PersistentDataContainer pdc = player.getPersistentDataContainer();
-        return pdc.getOrDefault(setting, PersistentDataType.BYTE, (byte) 0) == (byte) 1 ? true : false;
+        byte defaultValue = main.getConfig().getBoolean(Config.CROP_REPLANT_ENABLED_BY_DEFAULT) ? (byte) 1 : (byte) 0;
+        return pdc.getOrDefault(setting, PersistentDataType.BYTE, defaultValue) == (byte) 1 ? true : false;
     }
 
     public static void setEnabled(Player player, NamespacedKey setting, boolean enabled) {

@@ -11,6 +11,7 @@ public class Config {
     public static final String LANGUAGE = "language";
     public static final String CROP_REPLANT_DELAY = "crop-replant-delay";
     public static final String CROP_REPLANT_COSTS = "crop-replant-costs";
+    public static final String CROP_REPLANT_ENABLED_BY_DEFAULT = "crop-replant-enabled-by-default";
     public static final String SAPLING_REPLANT = "plant-fallen-saplings";
     public static final String SAPLING_REPLANT_DELAY = "plant-fallen-saplings-delay";
     public static final String SAPLING_REPLANT_THROWN_BY_PLAYER = "plant-fallen-saplings-thrown-by-player";
@@ -26,6 +27,7 @@ public class Config {
         addDefault(LANGUAGE, "en");
         addDefault(CROP_REPLANT_DELAY, 1.0D);
         addDefault(CROP_REPLANT_COSTS, true);
+        addDefault(CROP_REPLANT_ENABLED_BY_DEFAULT, false);
         addDefault(SAPLING_REPLANT, true);
         addDefault(SAPLING_REPLANT_DELAY, 120.0D);
         addDefault(SAPLING_REPLANT_THROWN_BY_PLAYER, true);
